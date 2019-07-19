@@ -80,6 +80,7 @@ fi
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh
 
 
+# Prompt
 function __setprompt
 {	
     local LAST_COMMAND=$? # Must come first!
@@ -188,7 +189,6 @@ function __setprompt
     local BRANCH=$(/usr/bin/git rev-parse --abbrev-ref HEAD 2> /dev/null)
     if [[ $BRANCH ]]; then
         GITCOLOR="${GITSYNC}"
-        BRANCH="(${BRANCH})"
         # Check if there are local commits
         if [[ $(/usr/bin/git log --branches --not --remotes) ]]; then
             GITCOLOR="${GITCOMMIT}"
@@ -197,11 +197,18 @@ function __setprompt
         if [[ $(/usr/bin/git status | /bin/grep modified) ]]; then
             GITCOLOR="${GITCHANGE}"
         fi
-
-        PS1+=" \[${GITCOLOR}\]${BRANCH}"
+        # Ignore home if it is in sync
+        if [[ $GITCOLOR != "$GITSYNC" ]] || [[ "$(pwd)" != "$HOME" ]]; then
+            PS1+=" \[${GITCOLOR}\](${BRANCH})"
+        fi
     fi
 
     # Set prompt
     PS1+="\[${NOCOLOR}\]\$ "
+    local GITCOMMIT="${YELLOW}"
+
+
+
+
 }
 PROMPT_COMMAND='__setprompt'
