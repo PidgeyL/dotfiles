@@ -1,3 +1,9 @@
+# Auto-update .bashrc unless .bashlock is set
+if [ ! -f ~/.bashlock ]; then
+    /usr/bin/git pull origin master >/dev/null 2>&1 &
+fi
+
+
 iatest=$(expr index "$-" i)
 
 
