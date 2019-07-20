@@ -198,7 +198,8 @@ function __setprompt
             GITCOLOR="${GITCHANGE}"
         fi
         # Ignore home if it is in sync
-        if [[ $GITCOLOR != "$GITSYNC" ]] || [[ "$(pwd)" != "$HOME" ]]; then
+        REPOLOCATION=$(/usr/bin/git rev-parse --show-toplevel)
+        if [[ $GITCOLOR != "$GITSYNC" ]] || [[ "$REPOLOCATION" != "$HOME" ]]; then
             PS1+=" \[${GITCOLOR}\](${BRANCH})"
         fi
     fi
