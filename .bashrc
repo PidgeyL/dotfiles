@@ -69,7 +69,7 @@ export VISUAL=nano
 # Check the window size after each command and, if necessary, update the values of LINES and COLUMNS
 shopt -s checkwinsize
 # Allow ctrl-S for history navigation (with ctrl-R)
-stty -ixon
+[[ $- == *i* ]] && stty -ixon
 
 # Ignore case on auto-completion
 if [[ $iatest > 0 ]]; then bind "set completion-ignore-case on"; fi
