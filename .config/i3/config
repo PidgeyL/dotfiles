@@ -1,0 +1,157 @@
+#######################################################################
+# i3 config file                                                      #
+#                                                                     #
+# Software is free software released under the "WTF Public License"   #
+#                                                                     #
+# Copyright (c) 2019  Pieter-Jan Moreels - pieter-jan@pidgey.net      #
+#######################################################################
+
+# #---Basics---# #
+for_window [class="^.*"] border pixel 2 
+gaps inner 15
+gaps outer 5
+font pango:monospace 8
+
+bar {
+        font pango:mono 10
+        status_command i3blocks
+        position top
+        mode dock
+        modifier None
+}
+
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id nm-applet
+
+# #---Functions---# #
+mode "resize" {
+        bindsym $left       resize shrink width 10 px or 10 ppt
+        bindsym Left        resize shrink width 10 px or 10 ppt
+        bindsym $up         resize shrink height 10 px or 10 ppt
+        bindsym Up          resize shrink height 10 px or 10 ppt
+        bindsym $down       resize grow height 10 px or 10 ppt
+        bindsym Down        resize grow height 10 px or 10 ppt
+        bindsym $right      resize grow width 10 px or 10 ppt
+        bindsym Right       resize grow width 10 px or 10 ppt
+        bindsym g           mode "gapsresize"
+        bindsym Return      mode "default"
+        bindsym Escape      mode "default"
+        bindsym Mod1+r      mode "default"
+}
+mode "gapsresize" {
+        bindsym $up         gaps outer current minus 5
+        bindsym Up          gaps outer current minus 5
+        bindsym $left       gaps inner current minus 5
+        bindsym Left        gaps inner current minus 5
+        bindsym $down       gaps outer current plus 5
+        bindsym Down        gaps outer current plus 5
+        bindsym $right      gaps inner current plus 5
+        bindsym Right       gaps inner current plus 5
+        bindsym c           mode "resize"
+        bindsym Return      mode "default"
+        bindsym Escape      mode "default"
+        bindsym Mod1+r      mode "default"
+}
+
+
+# use these keys for focus, movement, and resize directions when reaching for
+# the arrows is not convenient
+set $up    l
+set $down  k
+set $left  j
+set $right semicolon
+
+# use Mouse+Mod1 to drag floating windows to their wanted position
+floating_modifier Mod1
+
+bindsym Mod1+Return           exec i3-sensible-terminal
+bindsym Mod1+d                exec dmenu_run
+bindsym Mod1+Shift+q          kill
+
+# #---Bindings: Focus & movement---# #
+bindsym Mod1+$left            focus left
+bindsym Mod1+Left             focus left
+bindsym Mod1+$down            focus down
+bindsym Mod1+Down             focus down
+bindsym Mod1+$up              focus up
+bindsym Mod1+Up               focus up
+bindsym Mod1+$right           focus right
+bindsym Mod1+Right            focus right
+bindsym Mod1+1                workspace $ws1
+bindsym Mod1+2                workspace $ws2
+bindsym Mod1+3                workspace $ws3
+bindsym Mod1+4                workspace $ws4
+bindsym Mod1+5                workspace $ws5
+bindsym Mod1+6                workspace $ws6
+bindsym Mod1+7                workspace $ws7
+bindsym Mod1+8                workspace $ws8
+bindsym Mod1+9                workspace $ws9
+bindsym Mod1+0                workspace $ws10
+bindsym Mod1+Shift+1          move container to workspace $ws1
+bindsym Mod1+Shift+2          move container to workspace $ws2
+bindsym Mod1+Shift+3          move container to workspace $ws3
+bindsym Mod1+Shift+4          move container to workspace $ws4
+bindsym Mod1+Shift+5          move container to workspace $ws5
+bindsym Mod1+Shift+6          move container to workspace $ws6
+bindsym Mod1+Shift+7          move container to workspace $ws7
+bindsym Mod1+Shift+8          move container to workspace $ws8
+bindsym Mod1+Shift+9          move container to workspace $ws9
+bindsym Mod1+Shift+0          move container to workspace $ws10
+bindsym Mod1+Shift+$left      move left
+bindsym Mod1+Shift+Left       move left
+bindsym Mod1+Shift+$down      move down
+bindsym Mod1+Shift+Down       move down
+bindsym Mod1+Shift+$up        move up
+bindsym Mod1+Shift+Up         move up
+bindsym Mod1+Shift+$right     move right
+bindsym Mod1+Shift+Right      move right
+# #---Bindings: Layout---# #
+bindsym Mod1+h                split h
+bindsym Mod1+v                split v
+bindsym Mod1+s                layout stacking
+bindsym Mod1+w                layout tabbed
+bindsym Mod1+e                layout toggle split
+bindsym Mod1+g                gaps inner current set 15; gaps outer current set 5
+bindsym Mod1+shift+g          gaps inner current set 0;  gaps outer current set 0
+bindsym Mod1+r                mode "resize"
+
+
+bindsym Mod1+Shift+space      floating toggle
+bindsym Mod1+f                fullscreen toggle
+
+bindsym Mod1+space            focus mode_toggle
+bindsym Mod1+a                focus parent
+
+bindsym Mod1+Shift+minus      move scratchpad
+bindsym Mod1+minus            scratchpad show
+
+bindsym Mod1+Shift+c          reload
+bindsym Mod1+Shift+r          restart
+bindsym Mod1+Shift+e          exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
+bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# resize window (you can also use the mouse for that)
+
+
+
+exec i3-config-wizard
+
+#Needed for i3-gaps
+#hide_edge_borders both
+
+exec_always feh --randomize --bg-scale ~/.local/wallpapers/*

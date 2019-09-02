@@ -1,0 +1,18 @@
+command=~/.local/bin/statusbar/$BLOCK_NAME
+separator_block_width=15
+markup=pango
+
+[warning]
+interval=5
+
+[volume]
+interval=once
+signal=10
+
+[battery]
+command=~/.local/bin/statusbar/battery BAT0
+interval=5
+
+[clock]
+label=📅
+interval=30

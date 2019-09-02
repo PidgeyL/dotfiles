@@ -1,0 +1,48 @@
+# Default vars
+DISKS=''
+MEM=''
+
+# Read config if exists
+if [ -f ~/.config/i3blocks/warning.conf ]; then
+    . ~/.config/i3blocks/warning.conf
+fi
+
+#########################
+# Check status of disks #
+#########################
+IFS=';' read -r -a DISKS <<< "$DISKS"
+
+for disk in "${DISKS[@]}"
+do
+    IFS=':' read -r -a disk <<< "$disk"
+    warn=$(echo "${disk[1]}"|sed "s/%//")
+    diskusage=$(df -h ${disk[0]} | awk '/[0-9]/ {print $5}' | sed "s/%//")
+    if [[ diskusage -ge warn ]]; then
+        # Don't spam the user with warnings
+        if [ ! -f /tmp/i3blocks/${USER}/warning/${disk[0]}.lock ]; then
+            notify-send "${disk[0]} exceeded ${warn}: ${diskusage}"
+            mkdir -p /tmp/i3blocks/${USER}/warning
+            touch /tmp/i3blocks/${USER}/warning/${disk[0]}.lock
+        fi
+    else
+        rm -f /tmp/i3blocks/${USER}/warning/${disk[0]}
+    fi
+done
+
+###############################
+# Check if RAM is running low #
+###############################
+if [ ! -z $MEM ]; then
+    free=$(free | awk '/^Mem:/ {print $4}')
+    free=$(($free / 1024))
+    if [[ $free -le  $MEM ]]; then
+        if [ ! -f /tmp/i3blocks/${USER}/warning/mem.lock ]; then
+            notify-send "Memory running low! (${free}M remaining)"
+            mkdir -p /tmp/i3blocks/${USER}/warning
+            touch /tmp/i3blocks/${USER}/warning/mem.lock
+        fi
+    else
+        rm -f /tmp/i3blocks/${USER}/warning/mem.lock
+    fi
+fi
+
