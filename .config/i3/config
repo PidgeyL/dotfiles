@@ -11,6 +11,7 @@ for_window [class="^.*"] border pixel 2
 gaps inner 15
 gaps outer 5
 font pango:monospace 8
+set $term --no-startup-id $TERMINAL
 
 bar {
         font pango:mono 10
@@ -64,7 +65,7 @@ set $right semicolon
 # use Mouse+Mod1 to drag floating windows to their wanted position
 floating_modifier Mod1
 
-bindsym Mod1+Return           exec i3-sensible-terminal
+bindsym Mod1+Return           exec $term
 bindsym Mod1+d                exec dmenu_run
 bindsym Mod1+Shift+q          kill
 
@@ -154,4 +155,6 @@ exec i3-config-wizard
 #Needed for i3-gaps
 #hide_edge_borders both
 
+exec_always xcompmgr
 exec_always feh --randomize --bg-scale ~/.local/wallpapers/*
+

@@ -1,0 +1,85 @@
+.TH ST Shortcuts
+.SH BUILT-IN
+.TP
+.B Break
+Send a break in the serial line.
+Break key is obtained in PC keyboards
+pressing at the same time control and pause.
+.TP
+.B Ctrl-Print Screen
+Toggle if st should print to the
+.I iofile.
+.TP
+.B Shift-Print Screen
+Print the full screen to the
+.I iofile.
+.TP
+.B Ctrl-Equals
+Increase font size.
+.TP
+.B Ctrl-Minus
+Decrease font size.
+.TP
+.B Ctrl-Shift-Home
+Reset to default font size.
+.TP
+.B Ctrl-Shift-c
+Copy the selected text to the clipboard selection.
+.TP
+.B Ctrl-Shift-v
+Paste from the clipboard selection.
+.TP
+.B Ctrl-Shift-y
+Paste from primary selection (middle mouse button).
+
+.SH CUSTOM
+.TP
+.B Ctrl-Shift-u
+Look through the screen buffer for
+.I urls
+and present a menu t the user.
+.TP
+.B Ctrl-Shift-k
+Scroll up through the scrollback.
+.TP
+.B Ctrl-Shift-j
+Scroll down through the scrollback.
+.TP
+.B Ctrl-Shift-Escape
+Enable
+.I select mode.
+
+.SH Select Mode
+.TP
+.B h, j, k, l:
+move cursor freely (arrow keys work too)
+.TP
+.B !, _, *:
+move cursor to the middle of the line/column/screen
+.TP
+.B Backspace, $:
+move cursor to the beginning/end of the line
+.TP
+.B PgUp, PgDown :
+move cursor to the beginning/end of the column
+.TP
+.B Home, End:
+move cursor to the top/bottom left corner of the screen
+.TP
+.B /, ?:
+activate input mode and search up/down
+.TP
+.B n, N:
+repeat last search, up/down
+.TP
+.B s:
+toggle move/selection mode
+.TP
+.B t:
+toggle regular/rectangular selection type
+.TP
+.B Return:
+quit keyboard_select, keeping the highlight of the selection
+.TP
+.B Escape:
+quit keyboard_select
