@@ -1,0 +1,35 @@
+#!/bin/sh
+# Default Variables
+WIDTH=320
+HEIGHT=240
+RES=$(xrandr | grep '*' | cut -f4 -d' ')
+
+# Kill existing scratch mpv
+pid=$(ps aux | grep -- "--title=scratch-mpv" | grep -v grep | awk '{print $2}')
+if [ -n "${pid}" ]; then
+    kill "$pid"
+    sleep 0.2
+fi
+
+# Start mpv
+mpv --player-operation-mode=pseudo-gui "$1" --title="scratch-mpv" &
+
+# Sleep until the window opened
+until xwininfo -tree -root | grep -q "scratch-mpv"
+do
+  sleep 0.2;
+done
+sleep 0.1;
+
+# Set location
+i3-msg [title="scratch-mpv"] floating enable > /dev/null
+i3-msg [title="scratch-mpv"] resize set $WIDTH $HEIGHT > /dev/null
+
+# Get window size so it can be moved properly
+SIZE=$(xwininfo -tree -root | grep scratch-mpv | awk '{print $5}' | cut -f1 -d+)
+X=`expr $(echo "${RES}" | cut -dx -f1) - $(echo "${SIZE}" | cut -dx -f1)`
+Y=`expr $(echo "${RES}" | cut -dx -f2) - $(echo "${SIZE}" | cut -dx -f2)`
+i3-msg [title="scratch-mpv"] move position ${X} ${Y} > /dev/null
+i3-msg [title="scratch-mpv"] move scratchpad > /dev/null
+i3-msg [title="scratch-mpv"] scratchpad show > /dev/null
+
