@@ -32,4 +32,5 @@ Y=`expr $(echo "${RES}" | cut -dx -f2) - $(echo "${SIZE}" | cut -dx -f2)`
 i3-msg [title="scratch-mpv"] move position ${X} ${Y} > /dev/null
 i3-msg [title="scratch-mpv"] move scratchpad > /dev/null
 i3-msg [title="scratch-mpv"] scratchpad show > /dev/null
-
+i3-msg [title="scratch-mpv"] border pixel 0 > /dev/null
+i3-msg [title="scratch-mpv"] sticky enable > /dev/null
