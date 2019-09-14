@@ -1,7 +1,8 @@
+#!/bin/bash
 export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 # Auto-update .bashrc unless .bashlock is set
 if [ ! -f ~/.bashlock ]; then
-    (/usr/bin/git -C $HOME pull origin master >/dev/null 2>&1 &)
+    (/usr/bin/git -C "$HOME" pull origin master >/dev/null 2>&1 &)
 fi
 
 
@@ -89,7 +90,7 @@ fi
 
 # Prompt
 function __setprompt
-{	
+{
     local LAST_COMMAND=$? # Must come first!
 
     # Define colors
@@ -220,3 +221,14 @@ function __setprompt
 
 }
 PROMPT_COMMAND='__setprompt'
+
+# Test if X is running, and if not, ask the user which interface to start
+xrunning=$(ps aux | grep "Xorg" | grep "$HOME" | grep -v "grep")
+if [ -z "$xrunning" ]; then
+    options=$(cat ~/.local/share/xorg/environments | grep -Ei `ls -f /usr/share/xsessions/ | tr '\n' '|' | sed 's/$/<none>/'` | grep -v "#")
+    choice=$(echo "$options" | cut -f1 -d' '| fzf -i --ansi --prompt "Start Environment> ")
+    if [ ! "$choice" = '<none>' ]; then
+        export X_ENV="$choice";
+        exec startx;
+    fi
+fi
