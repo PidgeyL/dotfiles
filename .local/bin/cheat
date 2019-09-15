@@ -1,0 +1,5 @@
+MAN=~/.local/share/man/
+file=$(find $MAN -name *.1 -printf '%f\n' | sed -e "s/.1//" | dmenu -i -l 20 -p "Cheatsheet:")
+if [ ! -z "$file" ];then
+    setsid $TERMINAL -e man -l ${MAN}${file}.1 & 
+fi
