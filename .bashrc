@@ -222,13 +222,15 @@ function __setprompt
 }
 PROMPT_COMMAND='__setprompt'
 
-# Test if X is running, and if not, ask the user which interface to start
-xrunning=$(ps aux | grep "Xorg" | grep "$HOME" | grep -v "grep")
-if [ -z "$xrunning" ]; then
-    options=$(cat ~/.local/share/xorg/environments | grep -Ei `ls -f /usr/share/xsessions/ | tr '\n' '|' | sed 's/$/<none>/'` | grep -v "#")
-    choice=$(echo "$options" | cut -f1 -d' '| fzf -i --ansi --prompt "Start Environment> ")
-    if [ ! "$choice" = '<none>' ]; then
-        export X_ENV="$choice";
-        exec startx;
+if [ -x "$(command -v startx)" ] && [ -x "$(command -v fzf)" ]; then
+    # Test if X is running, and if not, ask the user which interface to start
+    xrunning=$(ps aux | grep "Xorg" | grep "$HOME" | grep -v "grep")
+    if [ -z "$xrunning" ]; then
+        options=$(cat ~/.local/share/xorg/environments | grep -Ei `ls -f /usr/share/xsessions/ | tr '\n' '|' | sed 's/$/<none>/'` | grep -v "#")
+        choice=$(echo "$options" | cut -f1 -d' '| fzf -i --ansi --prompt "Start Environment> ")
+        if [ ! "$choice" = '<none>' ]; then
+            export X_ENV="$choice";
+            exec startx;
+        fi
     fi
 fi
