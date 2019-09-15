@@ -1,0 +1,49 @@
+#!/bin/sh
+# Interface between i3 and pulsemixer
+HELP=$'Usage of pmctl
+ - pmctl volume <raise|lower> <number>
+ - pmctl mute <on|off|toggle>
+'
+
+case $1 in
+    volume)
+        case $2 in
+            (raise|lower)
+                re='^[0-9]+$'
+                if ! [[ $3 =~ $re ]] ; then
+                    echo "$HELP"; exit 1
+                fi
+                current=$(pulsemixer --get-volume | cut -f1 -d' ')
+                if [ $2 = "raise" ]; then
+                    vol=$(($current + $3))
+                else
+                    vol=$(($current - $3))
+                fi
+                if [ $vol -gt 100 ]; then
+                    vol=100
+                fi
+                if [ $vol -lt 0 ]; then
+                    vol=0
+                fi
+                pulsemixer --set-volume $vol ;;
+            *)
+                echo "$HELP"; exit 1 ;;
+            esac
+        ;;
+    mute)
+        case $2 in
+            on)
+                pulsemixer --mute ;;
+            off)
+                pulsemixer --unmute ;;
+            toggle)
+                pulsemixer --toggle-mute ;;
+            *)
+                echo "$HELP"; exit 1 ;;
+            esac
+        ;;
+    *)
+        echo "$HELP"; exit 0 ;;
+esac
+pkill -RTMIN+10 i3blocks
+
