@@ -6,11 +6,16 @@
 
 wallpapers=$(ls ~/.local/wallpapers)
 if ! [ -z $(echo "$wallpapers" | grep "^wallpaper.png$") ]; then
-    echo "${HOME}/.local/wallpapers/wallpaper.png"
-    exit 0
+    wallpaper="${HOME}/.local/wallpapers/wallpaper.png"
+else
+    if ! [ -z $(echo "$@" | grep "png") ]; then
+        wallpapers=$(echo "$wallpapers" | grep -i ".png$")
+    fi
+    wallpaper="${HOME}/.local/wallpapers/"$(echo "$wallpapers" | shuf -n 1)
 fi
-if [ "$1" = "png" ]; then
-    wallpapers=$(echo "$wallpapers" | grep -i ".png$")
+if ! [ -z $(echo "$@" | grep "lock") ]; then
+    resolution=$(xrandr | grep "*" | cut -f4 -d' ')
+    convert "$wallpaper" "${HOME}/.local/share/i3lock/lock.png" -gravity center -composite -matte -scale ${resolution} /tmp/i3lock.png
+    wallpaper="/tmp/i3lock.png"
 fi
-echo "${HOME}/.local/wallpapers/"$(echo "$wallpapers" | shuf -n 1)
-exit 0
+echo "$wallpaper"

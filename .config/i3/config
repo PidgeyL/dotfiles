@@ -70,7 +70,7 @@ floating_modifier Mod1
 bindsym Mod1+Return           exec $term
 bindsym Mod1+d                exec dmenu_run
 bindsym Mod1+Shift+q          kill
-bindsym Mod4+l                exec i3lock -e -u -i $(i3wallpaper png)
+bindsym Mod4+l                exec i3lock -e -u -i $(i3wallpaper png lock)
 
 # #---Bindings: Focus & movement---# #
 bindsym Mod1+$left            focus left
