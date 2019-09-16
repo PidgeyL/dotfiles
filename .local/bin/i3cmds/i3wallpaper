@@ -1,0 +1,16 @@
+#!/bin/sh
+# Defaults to wallpaper.png if wallpaper.png is present
+# You can add the png modifier to select only png files
+# From the remaining files in ~/.local/wallpapers, a picture at
+#  random is selected
+
+wallpapers=$(ls ~/.local/wallpapers)
+if ! [ -z $(echo "$wallpapers" | grep "^wallpaper.png$") ]; then
+    echo "${HOME}/.local/wallpapers/wallpaper.png"
+    exit 0
+fi
+if [ "$1" = "png" ]; then
+    wallpapers=$(echo "$wallpapers" | grep -i ".png$")
+fi
+echo "${HOME}/.local/wallpapers/"$(echo "$wallpapers" | shuf -n 1)
+exit 0

@@ -5,6 +5,8 @@
 #                                                                     #
 # Copyright (c) 2019  Pieter-Jan Moreels - pieter-jan@pidgey.net      #
 #######################################################################
+# Mod1 = Alt
+# Mod4 = Windows Key
 
 # #---Basics---# #
 for_window [class="^.*"] border pixel 2 
@@ -68,6 +70,7 @@ floating_modifier Mod1
 bindsym Mod1+Return           exec $term
 bindsym Mod1+d                exec dmenu_run
 bindsym Mod1+Shift+q          kill
+bindsym Mod4+l                exec i3lock -e -u -i $(i3wallpaper png)
 
 # #---Bindings: Focus & movement---# #
 bindsym Mod1+$left            focus left
@@ -158,4 +161,4 @@ for_window [class="scratch-*"] border pixel 7
 exec i3-config-wizard
 
 exec_always xcompmgr
-exec_always feh --randomize --bg-scale ~/.local/wallpapers/*
+exec_always feh --bg-scale $(i3wallpaper)
