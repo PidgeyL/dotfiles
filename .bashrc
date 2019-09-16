@@ -1,4 +1,9 @@
 #!/bin/bash
+export EDITOR="nano"
+export BROWSER="firefox"
+export TERMINAL="st"
+export MUSIC="ncmpcpp"
+
 export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 # Auto-update .bashrc unless .bashlock is set
 if [ ! -f ~/.bashlock ]; then

@@ -1,6 +1,0 @@
-#!/usr/bin/env sh
-
-export EDITOR="nano"
-export BROWSER="firefox"
-export TERMINAL="/usr/local/bin/st"
-export MUSIC="ncmpcpp"
