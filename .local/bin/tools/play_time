@@ -1,0 +1,38 @@
+#!/bin/sh
+# Calculate total length of all audio files in a folder
+# Usage: play_time folder [notation (full|sec)]
+# If notation is not used, defaults to full notation
+# REQUIRES: ffmpeg
+if [ ! -x "$(command -v ffmpeg)" ]; then
+    echo "ffmpeg not installed!"
+    exit 1
+fi
+
+FILE_DIR="$1"
+REPR="$2"
+PLAY_TIME=0
+
+# Support spaces in name
+IFS=$(echo -en "\n\b")
+
+for FILE_NAME in $(find "$FILE_DIR" -type f -printf '%f\n'); do
+    FILE="${FILE_DIR}${FILE_NAME}"
+    LEN=$(ffmpeg -i "$FILE" 2>&1 | grep "Duration" | cut -f4 -d' ' | sed 's/,//')
+    if [ ! -z "$LEN" ]; then
+        H=$(echo "$LEN" | cut -f1 -d:)
+        M=$(echo "$LEN" | cut -f2 -d:)
+        S=$(echo "$LEN" | cut -f3 -d: | cut -f1 -d.)
+        PLAY_TIME=$(($PLAY_TIME + $H * 3600 ))
+        PLAY_TIME=$(($PLAY_TIME + $M * 60 ))
+        PLAY_TIME=$(($PLAY_TIME + $S))
+    fi
+done
+
+if [ "$REPR" = "sec" ]; then
+    echo "$PLAY_TIME"
+else
+    HOURS=$(($PLAY_TIME/3600))
+    MINUTES=$((($PLAY_TIME%3600)/60))
+    SECONDS=$(($PLAY_TIME%60))
+    printf "%02d:%02d:%02d\n" $HOURS $MINUTES $SECONDS
+fi
