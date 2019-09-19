@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+filter() {
+    sed "/^volume:/d" | tac | cut -c1-25 | sed -e "s/\\&/&amp;/g;s/\\[paused\\].*/<span color=\"gray\" font_style=\"italic\">/g;s/\\[playing\\].*/<span>/g" | tr -d '\n' | sed -e "s/$/<\\/span>\n/g"
+}
+
+mpc idle player > /dev/null; mpc status | filter
+

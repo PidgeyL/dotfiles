@@ -5,6 +5,10 @@ markup=pango
 [warning]
 interval=5
 
+[music]
+label=🎼
+interval=repeat
+
 [volume]
 interval=once
 signal=10
