@@ -31,14 +31,14 @@ exec --no-startup-id xcompmgr
 
 # #---Functions---# #
 mode "resize" {
-        bindsym $left       resize shrink width 10 px or 10 ppt
-        bindsym Left        resize shrink width 10 px or 10 ppt
-        bindsym $up         resize shrink height 10 px or 10 ppt
-        bindsym Up          resize shrink height 10 px or 10 ppt
-        bindsym $down       resize grow height 10 px or 10 ppt
-        bindsym Down        resize grow height 10 px or 10 ppt
-        bindsym $right      resize grow width 10 px or 10 ppt
-        bindsym Right       resize grow width 10 px or 10 ppt
+        bindsym $left       resize grow left 10px;  resize shrink right 10px;
+        bindsym Left        resize grow left 10px;  resize shrink right 10px;
+        bindsym $up         resize grow up 10px;    resize shrink down 10px;
+        bindsym Up          resize grow up 10px;    resize shrink down 10px;
+        bindsym $down       resize grow down 10px;  resize shrink up 10px;
+        bindsym Down        resize grow down 10px;  resize shrink up 10px;
+        bindsym $right      resize grow right 10px; resize shrink left 10px;
+        bindsym Right       resize grow right 10px; resize shrink left 10px;
         bindsym g           mode "gapsresize"
         bindsym Return      mode "default"
         bindsym Escape      mode "default"
@@ -112,6 +112,7 @@ bindsym Mod1+Shift+$up        move up
 bindsym Mod1+Shift+Up         move up
 bindsym Mod1+Shift+$right     move right
 bindsym Mod1+Shift+Right      move right
+
 # #---Bindings: Layout---# #
 bindsym Mod1+Shift+v          split h
 bindsym Mod1+v                split v
