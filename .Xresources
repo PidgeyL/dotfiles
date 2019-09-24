@@ -1,11 +1,10 @@
 !! Colorscheme
-! Special
+! special
 
-st.background:  #2e3440
+st.background:  #000000
 st.cursorColor: #cccccc
 st.alpha:       0.6
 st.shell:       /bin/sh
-
 st.color0:      #3b4252
 st.color1:      #bf616a
 st.color2:      #a3be8c
@@ -22,4 +21,24 @@ st.color12:     #81a1c1
 st.color13:     #b48ead
 st.color14:     #8fbcbb
 st.color15:     #eceff4
+
+i3wm.client.background:       #000000
+i3wm.client.border_focused:   #e5e9f0
+i3wm.client.border_unfocused: #4c566a
+i3wm.client.border_inactive:  #4c566a
+i3wm.client.urgent:           #bf616a
+i3wm.client.indicator:        #bf616a
+i3wm.client.text_focused:     #eceff4
+i3wm.client.text_unfocused:   #e5e9f0
+i3wm.client.text_inactive:    #e5e9f0
+i3wm.client.text_urgent:      #e5e9f0
+i3wm.bar.background_focused:  #81a1c1
+i3wm.bar.background_inactive: #4c566a
+i3wm.bar.background_urgent:   #bf616a
+i3wm.bar.text_focused:        #e5e9f0
+i3wm.bar.text_inactive:       #e5e9f0
+i3wm.bar.text_urgent:         #e5e9f0
+i3wm.bar.separator:           #e5e9f0
+i3wm.bar.background:          #3b4252
+i3wm.bar.statusline:          #e5e9f0
 

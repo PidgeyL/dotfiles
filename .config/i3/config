@@ -15,14 +15,6 @@ gaps outer 5
 font pango:monospace 8
 set $term --no-startup-id $TERMINAL
 
-bar {
-        font pango:mono 10
-        status_command i3blocks
-        position top
-        mode dock
-        modifier None
-}
-
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
@@ -165,3 +157,49 @@ for_window [class="scratch-*"] border pixel 7
 exec i3-config-wizard
 
 exec_always feh --bg-scale $(i3wallpaper)
+
+# Load color pack
+set_from_resource $cbg       i3wm.client.background        #000000
+set_from_resource $cborderf  i3wm.client.border_focused    #C0C0C0
+set_from_resource $cborderuf i3wm.client.border_unfocused  #808080
+set_from_resource $cborderi  i3wm.client.border_inactive   #808080
+set_from_resource $curgent   i3wm.client.urgent            #800000
+set_from_resource $cindic    i3wm.client.indicator         #FF0000
+set_from_resource $ctextf    i3wm.client.text_focused      #C0C0C0
+set_from_resource $ctextuf   i3wm.client.text_unfocused    #FFFFFF
+set_from_resource $ctexti    i3wm.client.text_inactive     #FFFFFF
+set_from_resource $ctextu    i3wm.client.text_urgent       #000000
+set_from_resource $bbgf      i3wm.bar.background_focused   #008080
+set_from_resource $bbgi      i3wm.bar.background_inactive  #808080
+set_from_resource $bbgu      i3wm.bar.background_urgent    #800000
+set_from_resource $btextf    i3wm.bar.text_focused         #FFFFFF
+set_from_resource $btexti    i3wm.bar.text_inactive        #C0C0C0
+set_from_resource $btextu    i3wm.bar.text_urgent          #C0C0C0
+set_from_resource $bsep      i3wm.bar.separator            #C0C0C0
+set_from_resource $bbg       i3wm.bar.background           #000000
+set_from_resource $bstatus   i3wm.bar.statusline           #FFFFFF
+
+#                       BORDER      BACKGROUND  TEXT      INDICATOR  CHILD_BORDER
+client.focused          $cborderf   $cbg        $ctextf   $cindic    $cborderf
+client.unfocused        $cborderuf  $cbg        $ctextuf  $cindic    $cborderuf
+client.focused_inactive $cborderi   $cbg        $ctexti   $cindic    $cborderi
+client.urgent           $curgent    $curgent    $ctextu   $cindic    $curgent
+client.background       $cbg
+
+bar {
+    font pango:mono 10
+    status_command i3blocks
+    position top
+    mode dock
+    modifier None
+    colors {
+        separator  $bsep
+        background $bbg
+        statusline $bstatus
+#                          BORDER  BACKGROUND  TEXT
+        focused_workspace  $bbgf   $bbgf       $btextf
+        active_workspace   $bbgf   $bbgf       $btextf
+        inactive_workspace $bbgi   $bbgi       $btexti
+        urgent_workspace   $bbgu   $bbgu       $btextu
+    }
+}
