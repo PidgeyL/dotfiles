@@ -131,6 +131,7 @@ function __setprompt
     local ERROR="${LIGHTRED}"
     local STATUS="${YELLOW}"
     local MESSAGE="${LIGHTGRAY}"
+    local VENV="${LIGHTMAGENTA}"
     local GITCHANGE="${LIGHTRED}"
     local GITCOMMIT="${YELLOW}"
     local GITSYNC="${LIGHTGREEN}"
@@ -215,6 +216,10 @@ function __setprompt
         if [[ $GITCOLOR != "$GITSYNC" ]] || [[ "$REPOLOCATION" != "$HOME" ]]; then
             PS1+=" \[${GITCOLOR}\](${BRANCH})"
         fi
+    fi
+
+    if [[ "$VIRTUAL_ENV" ]]; then
+        PS1+="\[${VENV}\][`/usr/bin/basename \"$VIRTUAL_ENV\"`]"
     fi
 
     # Set prompt
