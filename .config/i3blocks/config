@@ -18,5 +18,9 @@ command=~/.local/bin/statusbar/battery BAT0
 interval=5
 
 [clock]
+label=🕗
+interval=30
+
+[date]
 label=📅
 interval=30
