@@ -1,0 +1,3 @@
+[submodule ".local/repos/DataTypes"]
+	path = .local/repos/DataTypes
+	url = https://github.com/pidgeyl/datatypes
