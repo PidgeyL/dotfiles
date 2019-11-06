@@ -14,7 +14,6 @@ fi
 iatest=$(expr index "$-" i)
 
 
-
 # Enable bash programmable completion features in interactive shells
 if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
@@ -68,6 +67,8 @@ export HISTCONTROL=erasedups:ignoredups:ignorespace
 # Causes bash to append to history instead of overwriting it so if you start a new terminal, you have old session history
 shopt -s histappend
 PROMPT_COMMAND='history -a'
+# Enable the del key with st
+tput smkx
 
 # Set the default editor
 export EDITOR=nano
