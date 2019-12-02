@@ -1,0 +1,37 @@
+#!/bin/sh
+# Default Variables
+WIDTH=320
+HEIGHT=240
+RES=$(xrandr | grep '*' | cut -f4 -d' ')
+
+# Kill existing scratch mplayer
+pid=$(ps aux | grep -- "--title=scratch-mplayer" | grep -v grep | awk '{print $2}')
+if [ -n "${pid}" ]; then
+    kill "$pid"
+    sleep 0.2
+fi
+
+# Start mplayer
+mplayer "$1" -title scratch-mplayer > /dev/null 2>&1 &
+disown
+
+# Sleep until the window opened
+until xwininfo -tree -root | grep -q "scratch-mplayer"
+do
+  sleep 0.2;
+done
+sleep 0.1;
+
+# Set location
+i3-msg [title="scratch-mplayer"] floating enable > /dev/null
+i3-msg [title="scratch-mplayer"] resize set $WIDTH $HEIGHT > /dev/null
+
+# Get window size so it can be moved properly
+SIZE=$(xwininfo -tree -root | grep scratch-mplayer | awk '{print $5}' | cut -f1 -d+)
+X=`expr $(echo "${RES}" | cut -dx -f1) - $(echo "${SIZE}" | cut -dx -f1)`
+Y=`expr $(echo "${RES}" | cut -dx -f2) - $(echo "${SIZE}" | cut -dx -f2)`
+i3-msg [title="scratch-mplayer"] move position ${X} ${Y} > /dev/null
+i3-msg [title="scratch-mplayer"] move scratchpad > /dev/null
+i3-msg [title="scratch-mplayer"] scratchpad show > /dev/null
+i3-msg [title="scratch-mplayer"] border pixel 0 > /dev/null
+i3-msg [title="scratch-mplayer"] sticky enable > /dev/null

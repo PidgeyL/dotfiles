@@ -124,7 +124,7 @@ bindsym Mod1+a                focus parent
 
 bindsym Mod1+Shift+minus      move scratchpad
 bindsym Mod1+minus            scratchpad show
-bindsym Mod1+Shift+s          [title="scratch-mpv"] scratchpad show
+bindsym Mod1+Shift+s          [title="scratch-mplayer"] scratchpad show
 bindsym Mod1+Shift+p          exec scratch-python
 bindsym Mod1+Shift+m          exec scratch-music
 

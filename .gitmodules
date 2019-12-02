@@ -1,3 +1,6 @@
 [submodule ".local/repos/DataTypes"]
 	path = .local/repos/DataTypes
 	url = https://github.com/pidgeyl/datatypes
+[submodule ".local/repos/webimport"]
+	path = .local/repos/webimport
+	url = https://github.com/northernsec/webimport
