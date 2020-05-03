@@ -1,0 +1,12 @@
+#!/bin/sh
+
+running=$(ps aux | grep -- "-c scratch-python" | grep -v grep)
+if [ -z "${running}" ]; then
+    $TERMINAL -c "scratch-python" -e "python3" "-q" &
+    until xwininfo -tree -root | grep -q "scratch-python"
+    do
+        sleep 0.1;
+    done
+fi
+i3-msg '[class="scratch-python"]' scratchpad show > /dev/null
+i3-msg '[class="scratch-python"]' move position center > /dev/null

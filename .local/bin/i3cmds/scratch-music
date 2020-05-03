@@ -1,0 +1,12 @@
+#!/bin/sh
+
+running=$(ps aux | grep -- "-c scratch-music" | grep -v grep)
+if [ -z "${running}" ]; then
+    $TERMINAL -c "scratch-music" -e "$MUSIC" &
+    until xwininfo -tree -root | grep -q "scratch-music"
+    do
+        sleep 0.1;
+    done
+fi
+i3-msg '[class="scratch-music"]' scratchpad show > /dev/null
+i3-msg '[class="scratch-music"]' move position center > /dev/null
