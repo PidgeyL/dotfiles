@@ -4,3 +4,6 @@
 [submodule ".local/repos/webimport"]
 	path = .local/repos/webimport
 	url = https://github.com/northernsec/webimport
+[submodule ".local/repos/KanaKeyboard"]
+	path = .local/repos/KanaKeyboard
+	url = https://github.com/NorthernSec/KanaKeyboard
