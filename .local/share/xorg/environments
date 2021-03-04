@@ -2,6 +2,7 @@
 # leave the <none> option for when you don't want to boot in graphical mode
 # You can sort the lines in your preferred order
 i3       i3.desktop
+qtile    qtile.desktop
 <none>
 gnome
 budgie
