@@ -88,8 +88,10 @@ def _check_dependency(tool, critical=False):
     if shutil.which(tool):
         return True
     else:
+        msg = "Dependency not installed: %s"%tool
+        _append_log(msg)
         if critical:
-            _popup("Dependency not installed: %s"%tool, "DEPENDENCY WARNING", "dependency")
+            _popup(msg, "DEPENDENCY WARNING", "dependency")
         return False
 
 
@@ -97,8 +99,10 @@ def _check_repo(repo, critical=False):
     if os.path.isdir(os.path.join(_REPO_LOCATION_, repo)):
         return True
     else:
+        msg = "Repo not available: %s"%repo
+        _append_log(msg)
         if critical:
-            _popup("Repo not available: %s"%repo, "DEPENDENCY WARNING", "dependency")
+            _popup(msg, "DEPENDENCY WARNING", "dependency")
         return False
 
 
@@ -107,8 +111,10 @@ def _check_package(pkg, critical=True):
     if pkg in modules:
         return True
     else:
+        msg = "Python package not installed: %s"%pkg
+        _append_log(msg)
         if critical:
-            _popup("Python package not installed: %s"%pkg, "DEPENDENCY WARNING", "dependency")
+            _popup(msg, "DEPENDENCY WARNING", "dependency")
         return False
 
 
@@ -116,3 +122,7 @@ def _popup(text, name, _class):
     cmd = 'read -n 1 -p "%s"'%text
     prog = TERMINAL(cmd, '"%s"'%name, 'dialog-%s'%_class)
     subprocess.Popen(prog, shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
+
+
+def _append_log(text):
+    open('/tmp/qtile-missing-dep.log', 'a').writelines([text])
