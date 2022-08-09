@@ -15,12 +15,18 @@ from settings import TERMINAL, MUSIC
 ##################
 # Default groups #
 ##################
+azerty = ("<ampersand>", "<eacute>", "<quotedbl>", "<apostrophe>", "<parenleft>", "<section>", "<egrave>", "<exclam>", "<ccedilla>", "<agrave>")
 groups = [Group(i) for i in "123456789"]
 
-for i in groups:
+for i, g in enumerate(groups):
     keys.extend([
-        Key("A-"+i.name,    lazy.group[i.name].toscreen(), desc="Switch to group {}".format(i.name)),
-        Key("A-S-"+ i.name, lazy.window.togroup(i.name),   desc="move window to group {}".format(i.name)),
+        # QWERTY keybinds
+        Key("A-"   + g.name, lazy.group[g.name].toscreen(), desc="Switch to group {}".format(g.name)),
+        Key("A-S-" + g.name, lazy.window.togroup(g.name),   desc="move window to group {}".format(g.name)),
+        # AZERTY keybinds
+        Key("A-"   + azerty[i], lazy.group[g.name].toscreen(), desc="Switch to group {}".format(g.name)),
+        Key("A-S-" + azerty[i], lazy.window.togroup(g.name),   desc="move window to group {}".format(g.name)),
+
     ])
 
 ###############
