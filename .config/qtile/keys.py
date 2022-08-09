@@ -68,6 +68,7 @@ keys = [
     Key('A-S-a',       lazy.group['scratch'].dropdown_toggle('volume')),
     Key('M-k',         lazy.function(KANA) ),
 
+    Key('A-s', lazy.next_screen()),
 
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
