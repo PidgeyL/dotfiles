@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
 
+
+
+
 case $BLOCK_BUTTON in
 	1) setsid "$TERMINAL" -e pulsemixer & ;;
 	2) pulsemixer --toggle-mute ;;
@@ -10,9 +13,16 @@ case $BLOCK_BUTTON in
 - Scroll to change."
 esac
 
-[ "$(pulsemixer --get-mute)" = "1" ] && printf "🔇\\n" && exit
+if ! command -v pulsemixer &> /dev/null
+then
+    [ $(pactl get-sink-mute 0 | cut -f2 -d' ') = "yes" ] && printf "🔇\\n" && exit
+    vol=$(pactl get-sink-volume 0 | grep -Po "(\d+)%" | sed s/%// | head -n 1)
+else
+    [ "$(pulsemixer --get-mute)" = "1" ] && printf "🔇\\n" && exit
+    vol=$(pulsemixer --get-volume | awk '{print $1}')
+fi
 
-vol=$(pulsemixer --get-volume | awk '{print $1}')
+
 
 if [ "$vol" -gt "70" ]; then
 	icon="🔊"
