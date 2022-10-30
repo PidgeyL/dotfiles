@@ -14,7 +14,6 @@ interval=once
 signal=10
 
 [battery]
-command=~/.local/bin/statusbar/battery BAT0
 interval=5
 
 [clock]
