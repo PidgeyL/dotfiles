@@ -351,12 +351,6 @@ function init()
 	config.MakeCommand("prevBookmark", _prev, config.OptionComplete)
 	config.MakeCommand("clearBookmarks", _clear, config.OptionComplete)
 
-	-- setup default bindings
-	config.TryBindKey("Ctrl-F2", "command:toggleBookmark", false)
-	config.TryBindKey("CtrlShift-F2", "command:clearBookmarks", false)
-	config.TryBindKey("F2", "command:nextBookmark", false)
-	config.TryBindKey("Shift-F2", "command:prevBookmark", false)
-
 	-- add our help topic
     config.AddRuntimeFile("bookmark", config.RTHelp, "help/bookmark.md")
 end
