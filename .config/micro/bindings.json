@@ -1,0 +1,39 @@
+{
+    "\u001b[P": "Delete",
+    "Delete":   "Delete",
+    "Tab":      "Autocomplete|IndentSelection|IndentLine",
+
+    "Ctrl-Up":          "ScrollUp",
+    "Ctrl-Down":        "ScrollDown",
+    "Ctrl-Left":        "WordLeft",
+    "Ctrl-Right":       "WordRight",
+    "Ctrl-Shift-Left":  "SelectWordLeft",
+    "Ctrl-Shift-Right": "SelectWordRight",
+    "Ctrl-a":           "SelectAll",
+
+    "Ctrl-s": "Save",
+    "Ctrl-q": "Quit",
+    "Ctrl-o": "OpenFile",
+
+    "Ctrl-x": "Cut",
+    "Ctrl-c": "Copy",
+    "Ctrl-v": "Paste",
+    "Ctrl-d": "DuplicateLine",
+    "Ctrl-z": "Undo",
+    "Ctrl-y": "Redo",
+
+    "Ctrl-g": "command:jumptag",
+
+    "Ctrl-t": "lua:bounce.bounce",
+
+    "Ctrl-f": "Find",
+    "Ctrl-n": "FindNext",
+    "Ctrl-p": "FindPrevious",
+
+    "Ctrl-b": "command:toggleBookmark",
+    "Ctrl-n": "command:nextBookmark",
+
+    "Ctrl-k": "None",
+    "Ctrl-u": "None",
+    "Ctrl-j": "None",
+}

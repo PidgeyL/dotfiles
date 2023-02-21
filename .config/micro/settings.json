@@ -1,0 +1,22 @@
+{
+    "*bindings.json": {
+        "readonly": true
+    },
+    "colorscheme": "pidgey",
+    "ft:go": {
+        "colorcolumn": 120,
+        "rmtrailingws": true
+    },
+    "ft:markdown": {
+        "rmtrailingws": false
+    },
+    "ft:python": {
+        "colorcolumn": 80,
+        "rmtrailingws": true
+    },
+    "hlsearch": true,
+    "softwrap": true,
+    "statusformatl": "$(modified) [$(line),$(col)] $(filename) ($(opt:filetype))",
+    "tabstospaces": true,
+    "wordwrap": true
+}
