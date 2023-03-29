@@ -25,7 +25,7 @@ alias lf="ls -l | egrep -v '^d'"  # files only
 alias ldir="ls -l | egrep '^d'"   # directories only
 
 # youtube-dl aliasses
-alias yta="youtube-dl --extract-audio --audio-format mp3 -q -o '~/Music/%(title)s.%(ext)s'"
+alias yta="yt-dlp --extract-audio --audio-format mp3 -q -o '~/Music/%(title)s.%(ext)s'"
 
 # chmod aliasses
 alias mx='chmod a+x'
